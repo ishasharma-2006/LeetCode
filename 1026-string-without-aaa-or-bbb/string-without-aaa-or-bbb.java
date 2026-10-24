@@ -1,32 +1,38 @@
 class Solution {
     public String strWithout3a3b(int a, int b) {
-        ArrayList<String> list=new ArrayList<>();
-        while(a>0&&b>0){
-            if(a>b){
-                list.add("aab");
-                a-=2;
+       StringBuilder result = new StringBuilder();
+      
+        // Process while both counts are positive
+        while (a > 0 && b > 0) {
+            if (a > b) {
+                // When 'a' count is greater, use two 'a's and one 'b'
+                result.append("aab");
+                a -= 2;
+                b -= 1;
+            } else if (a < b) {
+                // When 'b' count is greater, use two 'b's and one 'a'
+                result.append("bba");
+                a -= 1;
+                b -= 2;
+            } else {
+                // When counts are equal, alternate between 'a' and 'b'
+                result.append("ab");
+                a--;
                 b--;
             }
-            else if(b>a){
-                list.add("bba");
-                b-=2;
-                a--;
-            }
-            else{
-                list.add("ab");
-                a--;b--;
-            }
         }
-         while(a > 0) {
-            list.add("a");
-            a--;
+      
+        // Append remaining 'a' characters if any
+        if (a > 0) {
+            result.append("a".repeat(a));
         }
-
-        while(b > 0) {
-            list.add("b");
-            b--;
+      
+        // Append remaining 'b' characters if any
+        if (b > 0) {
+            result.append("b".repeat(b));
         }
-       String s= String.join("",list);
-       return s;
+      
+        return result.toString();
+    
     }
 }
